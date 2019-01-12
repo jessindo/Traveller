@@ -4,7 +4,7 @@
  */
 
 var express = require('express');
-//var routes = require('./routes');
+var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 var app      = express();
@@ -20,9 +20,24 @@ var session      = require('express-session');
 
 var errorHandler = require('errorhandler');
 
+var firebase = require("firebase-admin");
+var serviceAccount = require("./serviceAccountKey.json");
+
+firebase.initializeApp({
+  credential: firebase.credential.cert(serviceAccount),
+  databaseURL: "https://traveller-43dad.firebaseio.com"
+});
+
+var db = firebase.database();
+var ref = db.ref("user");
+ref.once("value", function(snapshot) {
+  console.log("user is:", snapshot.val());
+});
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser()); // read cookies (needed for auth)
+
 
 //load routes
 //sample routes
@@ -50,7 +65,7 @@ if ('development' == app.get('env')) {
   app.use(errorHandler());
 }
 
-mysql.createConnection({multipleStatements: true});
+/*mysql.createConnection({multipleStatements: true});
 
 app.use(
 
@@ -64,10 +79,10 @@ app.use(
 
     },'pool') //or single
 
-);
+);*/
 
 app.get('/', login.home);
-//app.get('/home', routes.index);
+app.get('/home', routes.index);
 app.get('/login', login.login);
 app.get('/signup', login.signup);
 
@@ -90,3 +105,4 @@ var server = http.createServer(app)
 server.listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'))
 })
+

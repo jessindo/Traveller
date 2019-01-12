@@ -10,6 +10,20 @@ var connection = mysql.createConnection({
     database:'iaproject'
 });
 
+/*var firebase = require("firebase-admin");
+var serviceAccount = require("./serviceAccountKey.json");
+
+firebase.initializeApp({
+  credential: firebase.credential.cert(serviceAccount),
+  databaseURL: "https://traveller-43dad.firebaseio.com"
+});
+
+var db = firebase.database();
+var ref = db.ref("user");
+ref.once("value", function(snapshot) {
+  console.log("user is:", snapshot.val());
+});*/
+
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
