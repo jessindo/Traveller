@@ -16,6 +16,8 @@
     "express": "^4.15.3",
     "express-myconnection": "1.0.4",
     "express-session": "^1.15.4",
+    "firebase": "^5.7.3",
+    "firebase-admin": "^6.5.0",
     "jade": "*",
     "jquery": "^3.2.1",
     "knex": "^0.13.0",
