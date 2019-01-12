@@ -1,0 +1,91 @@
+<!DOCTYPE html> 
+<html>
+
+<style>
+/* GLOBAL STYLES */
+body {
+  background: #333;
+  padding-top: 5em;
+  display: flex;
+  justify-content: center;
+}
+
+h2{
+	text-align: left;
+}
+
+/* DEMO-SPECIFIC STYLES */
+.typewriter h1 {
+  color: #fff;
+  font-family: monospace;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: 
+    typing 3.5s steps(30, end),
+    blink-caret .5s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange }
+}
+</style>
+
+<!--implement Firebase-->
+
+<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
+<script>
+        var config = {
+            apiKey: "AIzaSyC4sWYs5suX-96UGweGz2r8MxrGW_82foo",
+            authDomain: "traveller-43dad.firebaseapp.com",
+            databaseURL: "https://traveller-43dad.firebaseio.com",
+            storageBucket: "traveller-43dad.appspot.com"
+          };
+          firebase.initializeApp(config);
+
+          var database = firebase.database();
+
+          var user = firebase.auth().currentUser;
+
+		if (user != null) {
+		  var name = user.displayName
+		  document.getElementById("welcome").innerHTML='Welcome, Traveller ' + name
+		  var email_address = user.email
+		  document.getElementById("email").innerHTML='Email: ' + email_address
+		}
+    </script>
+
+<script src="apps.js"></script>
+
+
+
+<head>
+<script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+</head>
+
+<!--Typewriter effect-->
+<div class="typewriter">
+  <h1 id ='welcome'>Welcome, Traveller (User).</h1>
+  <h2 id ='email'> </h2>
+</div>
+
+<!--pulls username from Firebase-->
+<script>
+	
+</script>
+
+
+
+
+</html>
