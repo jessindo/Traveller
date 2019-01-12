@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+.tablink:hover {
+  background-color: #777;
+}
+
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+    text-decoration: none;
+}
+
+#hidden {
+	color: #555;
+}
+#hidden:hover {
+  background-color: #777;
+  color: #777;
+}
+
+.tabcontent {
+  color: white;
+  display: none;
+  padding: 50px;
+  text-align: center;
+}
+
+</style>
+</head>
+<body>
+
+
+<button id = "traveller" class="tablink"><strong>Traveller</strong></button>
+<button id = "hidden" class="tablink">ee</button>
+<button id = "hidden" class="tablink">ee</button>
+<button id = "profile" class="tablink">Hello, User</button>
+  
+  <script type="text/javascript">
+    
+
+    document.querySelector("#traveller").onclick = function () {
+        window.top.location.href = "http://www.google.com"; 
+    };
+
+    document.querySelector("#profile").onclick = function () {
+        window.top.location.href = "http://www.google.com"; 
+    };
+
+
+</script>
+
+   
+</body>
+</html> 
