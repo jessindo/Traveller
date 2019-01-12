@@ -1,65 +1,119 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
+	<title>Explore</title>
+	<style>
+       /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+	<link rel="stylesheet" type="text/css" href="test.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+	
+			$('ul.tabs li').click(function(){
+				var tab_id = $(this).attr('data-tab');
 
-.tablink:hover {
-  background-color: #777;
-}
+				$('ul.tabs li').removeClass('current');
+				$('.tab-content').removeClass('current');
 
-.tablink {
-  background-color: #555;
-  color: white;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  font-size: 17px;
-  width: 25%;
-    text-decoration: none;
-}
+				$(this).addClass('current');
+				$("#"+tab_id).addClass('current');
+			})
 
-#hidden {
-	color: #555;
-}
-#hidden:hover {
-  background-color: #777;
-  color: #777;
-}
-
-.tabcontent {
-  color: white;
-  display: none;
-  padding: 50px;
-  text-align: center;
-}
-
-</style>
+		})
+	</script>
 </head>
 <body>
 
+	<h1>LA</h1>
+		
 
-<button id = "traveller" class="tablink"><strong>Traveller</strong></button>
-<button id = "hidden" class="tablink">ee</button>
-<button id = "hidden" class="tablink">ee</button>
-<button id = "profile" class="tablink">Hello, User</button>
-  
-  <script type="text/javascript">
-    
+		<div class="container">
 
-    document.querySelector("#traveller").onclick = function () {
-        window.top.location.href = "http://www.google.com"; 
-    };
+		<ul class="tabs">
+			<li class="tab-link current" data-tab="tab-1">Tab One</li>
+			<li class="tab-link" data-tab="tab-2">Maps</li>
+			<li class="tab-link" data-tab="tab-3">Calendar</li>
+			<li class="tab-link" data-tab="tab-4">Schedule</li>
+		</ul>
 
-    document.querySelector("#profile").onclick = function () {
-        window.top.location.href = "http://www.google.com"; 
-    };
+		<div id="tab-1" class="tab-content current">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+		</div>
+		<div id="tab-2" class="tab-content">
+			<div id="map"></div>
+		    <script>
+		// Initialize and add the map
+		function initMap() {
+		  // The location of Uluru
+		  //var uluru = {lat: -25.344, lng: 131.036};
 
+		   var locations = [
+		      ['Bondi Beach', -33.890542, 151.274856, 4],
+		      ['Coogee Beach', -33.923036, 151.259052, 5],
+		      ['Cronulla Beach', -34.028249, 151.157507, 3],
+		      ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+		      ['Maroubra Beach', -33.950198, 151.259302, 1]
+		    ];
+		  // The map, centered at Uluru
+		  var map = new google.maps.Map(
+		      document.getElementById('map'), {
 
-</script>
+		      		//center: new google.maps.LatLng(-33.92, 151.25)
+		    });
+		  var infowindow = new google.maps.InfoWindow();
 
-   
+		  bounds  = new google.maps.LatLngBounds();
+
+		  // The marker, positioned at Uluru
+		  var marker, i;
+
+	    for (i = 0; i < locations.length; i++) {  
+	      marker = new google.maps.Marker({
+	        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+	        map: map
+	      });
+
+	      loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+			bounds.extend(loc);
+
+	      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+	        return function() {
+	          infowindow.setContent(locations[i][0]);
+	          infowindow.open(map, marker);
+	        }
+	      })(marker, i));
+	    }
+	    map.setOptions({
+		    maxZoom: 10,
+		  	minZoom: 10
+		});
+
+	    map.fitBounds(bounds);   
+		map.panToBounds(bounds);
+
+		}
+		    </script>
+		    <!--Load the API from the specified URL
+		    * The async attribute allows the browser to render the page while the API loads
+		    * The key parameter will contain your own API key (which is not needed for this tutorial)
+		    * The callback parameter executes the initMap() function
+		    -->
+		    <script async defer src="https://maps.googleapis.com/maps/api/js?key=APIKEY&callback=initMap" type="text/javascript"></script>
+		</div>
+		<div id="tab-3" class="tab-content">
+			Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+		</div>
+		<div id="tab-4" class="tab-content">
+			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+		</div>
+
+	</div><!-- container -->
+
 </body>
-</html> 
+</html>
+
