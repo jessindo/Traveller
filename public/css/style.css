@@ -1,0 +1,175 @@
+body {
+  margin:0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background:#eee;
+  width:100%;
+  height:100%;
+}
+#homepage{
+
+  background: url("http://assets.marthastewart.com/styles/wmax-1500/d38/coffee-table-spread-049-exp2-mld110654/coffee-table-spread-049-exp2-mld110654_horiz.jpg?itok=9UiDi2Bz") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+
+*{
+
+    border-radius:0px;
+}
+a {
+  color: #00B7FF;
+}
+
+#wrapper{
+    
+    margin-top:30px;
+    width:90%;
+    min-height:600px;
+    margin-left:5%;
+    border:1px solid #ddd;
+    background:#fff;
+   
+}
+
+.page-container{padding:20px;}
+.page-data{padding:10px;}
+.page-header{
+    
+    padding:2px;
+    padding-left:40px;
+    background:#665847;color:#FEFFFD;
+}
+
+.data-btn{padding-left:8px}
+.data-btn button{
+    padding:10px 20px;background:#FF9900;border:1px solid #fff;
+    color:#FEFFFD;font-weight:bold;
+}
+
+.alignleft {
+	float: left;
+}
+
+.alignright {
+	float: right;
+}
+
+.data-table{padding-left:10px;}
+.data-table table{border-collapse:collapse;border:1px solid #ddd;width:100%}
+.a-inside{padding:4px 10px;border:1px solid #fff;text-decoration:none;}
+.a-inside.edit{background-color:#00CC00;color:#fff;}
+.a-inside.delete{background-color:#D23641;color:#fff;}
+.a-inside.view{background-color:#6599FF;color:#fff;}
+
+input[type="text"]{
+    
+    border:1px solid #ddd;
+    height:26px;
+    width:300px;
+}
+.cancel{
+    background-color:#D23641;color:#fff;
+    border:1px solid #d32132;color:#fff;
+    padding:8px 35px;font-weight:bold;
+   
+
+}
+input[type="submit"]{
+
+    border:1px solid #6599FF;color:#fff;
+    padding:8px 35px;font-weight:bold;
+    background:#6599FF;
+}
+textarea{ border:1px solid #ddd;width:296px;}
+.label{font-weight:bold;}
+
+#footer{margin-left:82%;margin-top:10%}
+
+/* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+/* Homepage text */
+.header {
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+  top: 30%; 
+  width: 60%;
+}
+
+h1 {
+  color: #000;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 70px;
+  font-weight: 400;
+  line-height: 60px;
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+}
+
+h2 {
+  color: #000;
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 100;
+  font-family: 'Open Sans', sans-serif;
+}
+h5 {
+    color: #FFF;
+    font-family: 'Open Sans', sans-serif;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 50;
+    font-family: 'Open Sans', sans-serif;
+  }
