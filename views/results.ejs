@@ -14,7 +14,7 @@
   <!-- <img src="images/laskyline.jpg" style="width:100%"> -->
   <div class="w3-display-bottomleft w3-container w3-amber w3-hover-orange w3-hide-small"
    style="bottom:10%;opacity:0.7;width:70%">
-  <h2><strong>Los Angeles</strong></h2>
+  <h2><strong><%-locals.usercity%></strong></h2>
 </div>
 </div>
 
@@ -23,6 +23,41 @@
   <div class="w3-topbar w3-border-amber">
     <h2><%-locals.usercity %></h2>
     <!-- <p>  API here to get info about location</p> -->
+
+     <%var desc = 'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=' + locals.usercity%> 
+    
+      
+      <%function getJSON(url) { %>
+      <%  var resp ; %>
+     <% var xmlHttp ; %>
+
+      <%  resp  = '' ;%>
+      <%  xmlHttp = new XMLHttpRequest();%>
+
+    <%    if(xmlHttp != null)    {%>
+   <%         xmlHttp.open( "GET", url, false );%>
+    <%        xmlHttp.send( null );%>
+    <%        resp = xmlHttp.responseText;%>
+    <%    }%>
+
+     <%   return resp ;%>
+   <% } %>
+
+     <% var wikijson = getJSON(desc);%>
+    <%  var wiki = JSON.parse(wikijson); %>
+
+      <%console.log(wikijson);%>
+
+      // $extract = current((array)wiki->query->pages)->extract;
+
+
+    
+
+
+    <!-- <%-desc += locals.usercity %> -->
+
+ 
+
   </div>
 </div>
 
@@ -40,16 +75,20 @@
     <%for(var i = 0; i < obj.results.length; i++) { %>
       <%var name = obj.results[i].name%>
       <%var photos = obj.results[i].photos %>
-      <%var pic = JSON.stringify(photos[0].html_attributions[0])%>
-      <%var picsub = pic.substring(11)%>
-       
+      <%var pref = photos[0].photo_reference%>
 
-     
+      <!--<%var pic = JSON.stringify(photos[0].photo_reference[0])%>-->
+      <!--<%var picsub = pic.substring(11)%> -->
+
+      <%var picjson = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference='+ pref +'&key=AIzaSyDP7TNhPwMtTB0BbdBz7A6doEkGoIw__v4' %>
+
+<!--       <img src="<%=picjson%>">
+ -->
 
 
     <tr>
      <!--  <td><%=photos.length%></td> -->
-      <!-- <td><%=JSON.stringify(photos[0])%></td>   -->
+      <td><img src="<%=picjson%>"></td>  
       <td><%=name%></td>
       <!-- <td><%=photos%></td> -->
     </tr>
@@ -57,6 +96,7 @@
    <% } %>
 
     <% console.log("object length", obj.length);%>
+
 
     <!-- <% console.log("object ", obj);%> -->
 
