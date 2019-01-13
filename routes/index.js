@@ -40,12 +40,17 @@ exports.results = function(req,res) {
    var geocoder = NodeGeocoder(options);
    var lat = "null";
    var long = "null";
+   var photoref = "null";
+
+   var city = req.query.city;
 
    // Using callback
-   geocoder.geocode('los angeles', function(err, geo_res, body) {
+   geocoder.geocode(city, function(err, geo_res, body) {
      // console.log(res);
      lat = geo_res[0].latitude; 
-     long = geo_res[0].longitude; 
+     long = geo_res[0].longitude;
+     //photoref = geo_res[5].photo_reference;
+ 
      // console.log("long", long);
      // console.log("lat", lat);
    //lat = res[0].latitude;
@@ -62,14 +67,9 @@ exports.results = function(req,res) {
 	var gjson = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?' + "location=" + location + "&radius=" + radius + "&type=" + type + "&keyword=" + keyword + "&key=" + 'AIzaSyDP7TNhPwMtTB0BbdBz7A6doEkGoIw__v4';
 	json = getJSON(gjson);
 
-
-
-
-
 	//gjson = getJSON('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&keyword=cruise&key=AIzaSyDP7TNhPwMtTB0BbdBz7A6doEkGoIw__v4');
 	// console.log("json , " + json);
 
-	var city = req.query.city;
 
 	//sends data to the results.ejs
 
