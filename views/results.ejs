@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<title>Search Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css" href="header.css">
+<body>
+
+<!-- header tab nav -->
+<iframe src="test.html"></iframe>
+
+<div class="w3-display-container" style="margin-bottom:50px">
+  <!-- <img src="images/laskyline.jpg" style="width:100%"> -->
+  <div class="w3-display-bottomleft w3-container w3-amber w3-hover-orange w3-hide-small"
+   style="bottom:10%;opacity:0.7;width:70%">
+  <h2><strong>Los Angeles</strong></h2>
+</div>
+</div>
+
+<div class="w3-row w3-container" style="margin:50px 0">
+<div class="w3-half w3-container">
+  <div class="w3-topbar w3-border-amber">
+    <h2><%-locals.usercity %></h2>
+    <!-- <p>  API here to get info about location</p> -->
+  </div>
+</div>
+
+<div class="w3-half w3-container">
+  <div class="w3-topbar w3-border-amber">
+    <!-- <img src="images/laskyline.jpg" style="width:100%"> -->
+    <h2>Travel Attractions</h2>
+    <!-- <p> attraction img and pull description here and then this div redirects to hanna's map pg</p> -->
+
+    <table>
+
+
+    <% var obj = JSON.parse(locals.blob) %>
+
+    <%for(var i = 0; i < obj.results.length; i++) { %>
+      <%var name = obj.results[i].name%>
+      <%var photos = obj.results[i].photos %>
+      <%var pic = JSON.stringify(photos[0].html_attributions[0])%>
+      <%var picsub = pic.substring(11)%>
+       
+
+     
+
+
+    <tr>
+     <!--  <td><%=photos.length%></td> -->
+      <!-- <td><%=JSON.stringify(photos[0])%></td>   -->
+      <td><%=name%></td>
+      <!-- <td><%=photos%></td> -->
+    </tr>
+
+   <% } %>
+
+    <% console.log("object length", obj.length);%>
+
+    <!-- <% console.log("object ", obj);%> -->
+
+  </div>
+</div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+  
+  //   function clickHandler() {
+  //     console.log("clicked")
+  //   }
+
+  // document.querySelectorAll('td').forEach(e => e.addEventListener("click", clickHandler));
+
+  $("td").on("click", function(){
+    alert($(this).html());
+    var arr = [];
+    sessionStorage.setItem('array', JSON.stringify(arr))
+  });
+
+</script>
+
+</body>
+</html>

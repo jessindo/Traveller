@@ -1,10 +1,45 @@
 <!DOCTYPE html>
 <html>
-<title>Search Page</title>
+<title>Results</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" type="text/css" href="header.css">
+<!-- <link rel="stylesheet" type="text/html" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+<style type="text/css">
+
+  .tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+  text-decoration: none;
+}
+
+#hidden {
+  color: #555;
+}
+
+.tabcontent {
+  color: white;
+  display: none;
+  padding: 50px;
+  text-align: center;
+}
+
+iframe {
+  width: 100%;
+  border: 0px;
+  height:50px;
+}
+
+#hide {
+  display: none;
+} 
+</style>
 <body>
 
 <!-- header tab nav -->
@@ -18,39 +53,36 @@
 </div>
 </div>
 
-
 <div class="w3-row w3-container" style="margin:50px 0">
 <div class="w3-half w3-container">
   <div class="w3-topbar w3-border-amber">
     <h2>Details</h2>
-    <p>  API here to get info about location</p>
+    <p>pull from API here to get info about location</p>
   </div>
 </div>
 
 <div class="w3-half w3-container">
   <div class="w3-topbar w3-border-amber">
-    <!-- <img src="images/laskyline.jpg" style="width:100%"> -->
+    <img src="images/laskyline.jpg" style="width:100%">
     <h2>Travel Attractions</h2>
     <p>pull attraction img and pull description here and then this div redirects to hanna's map pg</p>
   </div>
 </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-    $.ajax({
-    url: '/searchresults',
-    complete: function(data) {
-    },
 
-     data: {
-        format: 'json'
-      }
+
+<script src="jquery-3.3.1.min.js">
+    $.ajax({
+    url: '/results',
+    complete: function(data) {
+      console.log("CIYY !@&");
+      console.log(data);
+    }
 });
 
 </script>
-
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+ 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 </body>
 </html>

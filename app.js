@@ -108,8 +108,6 @@ app.get('/index.html', function(req, res) {
 
 var NodeGeocoder = require('node-geocoder');
 
-   
-
   app.get('/user', function(req, res){
         response = {
             first_name : req.query.first_name,
@@ -121,8 +119,6 @@ var NodeGeocoder = require('node-geocoder');
         
         res.end(JSON.stringify(response));
     });
-
-
 
 
 var server = http.createServer(app)

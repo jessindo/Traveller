@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Search Form</title>
+	<link rel="stylesheet" type="text/html" href="header.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<style>
+		.form-check-label {
+			padding-top: calc(.5rem - 1px * 2);
+			padding-bottom: calc(.5rem - 1px * 2);
+			margin-bottom: 0;
+		}
+	</style>
+</head>
+<body>
+
+	<iframe style="width: 100%;border: 0px;height:50px;" src="/test.html"></iframe>
+	
+	<div class="container">
+		<div class="row">
+			<h1 class="col-12 mt-4 mb-4"> Search Form</h1>
+		</div> <!-- .row -->
+	</div> <!-- .container -->
+	<div class="container">
+
+		<form action="/searchresults" method="GET">
+
+			<div class="form-group row">
+				<label for="name-id" class="col-sm-3 col-form-label text-sm-right"> City:</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" id="name-id" name="city">
+				</div>
+			</div> <!-- .form-group -->
+			<div class="form-group row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-9 mt-2">
+					<button type="submit" class="btn btn-warning">Search</button>
+					
+				</div>
+			</div> <!-- .form-group -->
+		</form>
+	</div> <!-- .container -->
+</body>
+</html>
