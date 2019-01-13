@@ -1,0 +1,80 @@
+<!DOCTYPE html> 
+<html>
+  <link rel="stylesheet" type="text/css" href="header.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<style>
+/* GLOBAL STYLES */
+body {
+  background: #333;
+  text-align: center;
+}
+
+/* DEMO-SPECIFIC STYLES */
+.typewriter h1 {
+  font-size: 60px;
+  color: #fff;
+  font-family: monospace;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: 
+    typing 3.5s steps(30, end),
+    blink-caret .5s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 70% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange }
+}
+label{
+  color: #fff;
+}
+.col-sm-10{
+  text-align: center;
+  padding-left: 160px;
+}
+#search-bar{
+  padding-left: 180px;
+}
+</style>
+
+
+<!--Typewriter effect-->
+<div class="typewriter">
+  <br><br><br><br><br><br>
+  <h1 id ='welcome'>Welcome, Traveller.</h1><br><br>
+</div>
+
+<body>
+  <div class="container">
+
+    <form action="searchresults.html" method="GET">
+      <div class="form-group row">
+        
+        <div class="col-sm-10" id="search-bar">
+          <input type="text" class="form-control" id="name-id" name="city" placeholder="City">
+        </div>
+      </div> <!-- .form-group -->
+
+      <div class="form-group row">
+        <div class="col-sm-10"></div>
+        <div class="col-sm-10">
+          <button type="submit" class="btn btn-warning">Search</button>
+          
+        </div>
+      </div> <!-- .form-group -->
+    </form>
+  </div> <!-- .container -->
+</body>
+
+
+</html>
