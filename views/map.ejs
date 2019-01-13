@@ -2,20 +2,7 @@
 <html>
 <head>
 	<title>Explore</title>
-	<script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
-	<script>
-	  // Initialize Firebase
-	  var config = {
-	    apiKey: "AIzaSyD6pY9brHDJGd94zDYZK5vzN3gGIFeiEq8",
-	    authDomain: "traveller-cal-1547328315313.firebaseapp.com",
-	    databaseURL: "https://traveller-cal-1547328315313.firebaseio.com",
-	    projectId: "traveller-cal-1547328315313",
-	    storageBucket: "traveller-cal-1547328315313.appspot.com",
-	    messagingSenderId: "95510829049"
-	  };
-	  firebase.initializeApp(config);
-	</script>
-
+	
 	<style>
        /* Set the size of the div element that contains the map */
       #map {
@@ -34,7 +21,7 @@
        	font-style:italic;
        }
     </style>
-	<link rel="stylesheet" type="text/css" href="map.css">
+	<link rel="stylesheet" type="text/css" href="test.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 	<script>
 		$(document).ready(function(){
@@ -51,6 +38,19 @@
 
 		})
 	</script>
+
+	<script>
+		function pageDir() {
+		  
+		  var txt;
+		  if (confirm("Is this is your lost destination or do you have other adventures?")) {
+		    txt = "You pressed OK!";
+		  } else {
+		    txt = "You pressed Cancel!";
+		  }
+		  document.getElementById("demo").innerHTML = txt;
+		}
+	</script>
 </head>
 <body>
 
@@ -65,6 +65,7 @@
 			<li class="tab-link" data-tab="tab-3">Schedule</li>
 		</ul>
 
+		<!--MAP -->
 		<div id="tab-1" class="tab-content current">
 			<div id="map"></div>
 		    <script>
@@ -126,19 +127,29 @@
 		    -->
 		    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4wQZHZOhSRa7sonXpzERdbdJuqK2XsOk&callback=initMap" type="text/javascript"></script>
 		</div>
+
+		<!--CAL -->
 		<div id="tab-2" class="tab-content">
 			<div id="cal">
 				<iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;height=400&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=945fathsf3efptdj8fbk6p9kl4%40group.calendar.google.com&amp;color=%2329527A&amp;ctz=America%2FNew_York" style="border:solid 1px #777" width="100%" height="400" frameborder="0" scrolling="no"></iframe>
 			</div>
 		</div>
+
+
+		<!-- Schedule -->
 		<div id="tab-3" class="tab-content">
 			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 			
+
 		</div>
-		
+		<div id="confirm" onclick="pageDir()">
+			<button class="conbut">Confirm Location</button>
+		</div>
+		<!--TODO: remove later-->
+		<p id="demo"></p>
 
 	</div><!-- container -->
-
+	
 </body>
 </html>
 

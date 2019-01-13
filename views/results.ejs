@@ -34,18 +34,22 @@
 
     <table>
 
-
+    <%var latlong = []; %>
     <% var obj = JSON.parse(locals.blob) %>
 
     <%for(var i = 0; i < obj.results.length; i++) { %>
       <%var name = obj.results[i].name%>
+      <%var geolat = obj.results[i].geometry.location.lat%>
+      <%var geolng = obj.results[i].geometry.location.lng%>
+      <%var ll = []; %>
+      <%ll.push(name); %>
+      <%ll.push(geolat); %>
+      <%ll.push(geolng); %>
+      <%latlong.push(ll); %>
+
       <%var photos = obj.results[i].photos %>
       <%var pic = JSON.stringify(photos[0].html_attributions[0])%>
       <%var picsub = pic.substring(11)%>
-       
-
-     
-
 
     <tr>
      <!--  <td><%=photos.length%></td> -->
@@ -76,9 +80,30 @@
   // document.querySelectorAll('td').forEach(e => e.addEventListener("click", clickHandler));
 
   $("td").on("click", function(){
-    alert($(this).html());
+   
     var arr = [];
-    sessionStorage.setItem('array', JSON.stringify(arr))
+    arr.push($(this).html());
+    sessionStorage.setItem('curr', JSON.stringify(arr));
+
+    sessionStorage.setItem('doublearray', JSON.stringify('<%=latlong%>'));
+
+    console.log("json string latlong",JSON.stringify('<%=latlong%>'));
+    /*if (sessionStorage.length == 0) {
+      sessionStorage.setItem('array', JSON.stringify(arr));
+    } else {
+      var old = JSON.parse(sessionStorage.getItem('array'));
+      var result = [];
+
+      for(var i in old)
+          result.push(old[i]);
+
+      result.push($(this).html());
+      sessionStorage.setItem('array', JSON.stringify(result));
+      console.log(JSON.stringify(result));
+    }*/
+
+  window.location.href = "/maps";
+
   });
 
 </script>

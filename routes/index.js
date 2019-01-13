@@ -20,7 +20,8 @@ exports.test = function(req,res) {
 };
 
 exports.maps = function(req,res) {
-	res.render("map");
+	res.sendfile('views/maps.html');
+	
 };
 
 //use google place api to get city location info

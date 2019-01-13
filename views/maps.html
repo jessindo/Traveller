@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Explore</title>
+	
+
+	<style>
+       /* Set the size of the div element that contains the map */
+       body{
+margin-top: 100px;
+font-family: 'Trebuchet MS', serif;
+line-height: 1.6
+}
+.container{
+	width: 800px;
+	margin: 0 auto;
+	
+}
+ul.tabs{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+ul.tabs li{
+	background: none;
+	color: #222;
+	display: inline-block;
+	padding: 10px 15px;
+	cursor: pointer;
+}
+
+ul.tabs li.current{
+	background: #ededed;
+	color: #222;
+}
+
+.tab-content{
+	display: none;
+	background: #ededed;
+	padding: 15px;
+}
+
+.tab-content.current{
+	display: inherit;
+		}
+
+
+      #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+       #cal{
+       	height: 400px;  /* The height is 400 pixels */
+        width: 100%;
+       }
+       #container{
+       	margin-bottom: 33%;
+       }
+       h1{
+       	text-align: center;
+       	font-style:italic;
+       }
+       .conbut, .add_search{
+       		display:inherit;
+       		background:#ededed;
+       		padding:15px;
+       		float:right;
+       		margin:3%;
+       		margin-right: 0;
+       		border-radius:12px;
+       		font-family: 'Trebuchet MS', serif;
+       }
+    </style>
+	<link rel="stylesheet" type="text/css" href="map.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script>
+		function saveDest(){
+			var text;
+			if(confirm("If this is the last destination to be added press okay. Otherwise, click cancel to continue searching.")){
+				document.getElementById("confirm").style.display="none";
+				
+				var arr=sessionStorage.getItem('curr');
+				if (sessionStorage.getItem('array').length == 0) {
+			      sessionStorage.setItem('array', JSON.stringify(arr));
+			    } else {
+			      var old = JSON.parse(sessionStorage.getItem('array'));
+			      
+			      var result = [];
+
+			      for(var i in old)
+			          result.push(old[i]);
+
+			      result.push(sessionStorage.getItem('curr'));
+
+			      sessionStorage.setItem('array', JSON.stringify(result));
+			      console.log(JSON.stringify(result));
+			    }
+			}
+			else{
+				window.location.href = "/searchform";
+				deleteMarkers();
+			}
+			
+		}
+
+		function addCont(){
+			var text;
+			alert("Adding and redirecting to search form!");
+				
+				var arr=sessionStorage.getItem('curr');
+
+
+				if (sessionStorage.getItem('array').length == 0) {
+			      sessionStorage.setItem('array', JSON.stringify(arr));
+			    } else {
+			      var old = JSON.parse(sessionStorage.getItem('array'));
+			      
+			      var result = [];
+
+			      for(var i in old)
+			          result.push(old[i]);
+
+			      result.push(sessionStorage.getItem('curr'));
+
+			      sessionStorage.setItem('array', JSON.stringify(result));
+			      console.log(JSON.stringify(result));
+			    }
+			    window.location.href = "/searchform";
+			    deleteMarkers();
+			
+			
+			
+		}
+
+
+	</script>
+
+	<script>
+		$(document).ready(function(){
+	
+			$('ul.tabs li').click(function(){
+				var tab_id = $(this).attr('data-tab');
+
+				$('ul.tabs li').removeClass('current');
+				$('.tab-content').removeClass('current');
+
+				$(this).addClass('current');
+				$("#"+tab_id).addClass('current');
+			})
+
+		})
+	</script>
+</head>
+<body>
+
+	
+		
+		<h1>Traveller</h1>
+		<div class="container">
+
+		<ul class="tabs">
+			<li class="tab-link current" data-tab="tab-1">Map</li>
+			<li class="tab-link" data-tab="tab-2">Calendar</li>
+			<li class="tab-link" data-tab="tab-3">Schedule</li>
+		</ul>
+
+		<div id="tab-1" class="tab-content current">
+			<div id="map"></div>
+		    <script>
+		// Initialize and add the map
+		function initMap() {
+		  // The location of Uluru
+		  //var uluru = {lat: -25.344, lng: 131.036};
+		  var temp = JSON.parse(sessionStorage.getItem('doublearray'));
+		  var temparr=temp.split(",");
+
+		  console.log(temp);
+		  console.log(temparr[0]);
+
+		  var locations = [];
+		  for (var i = 0; i < temparr.length/3; i+=3) {
+		  	var darr = [];
+		  	for (var j = 0; j < 3; j++) {
+		  		darr.push(temparr[i+j]);
+		  	}
+		  	locations.push(darr);
+		  }
+
+		  console.log(locations);
+
+		   // var locations = [
+		   //    ['Bondi Beach', -33.890542, 151.274856, 4],
+		   //    ['Coogee Beach', -33.923036, 151.259052, 5],
+		   //    ['Cronulla Beach', -34.028249, 151.157507, 3],
+		   //    ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+		   //    ['Maroubra Beach', -33.950198, 151.259302, 1]
+		   //  ];
+		  // var locations = temp;
+
+
+		  // The map, centered at Uluru
+		  var map = new google.maps.Map(
+		      document.getElementById('map'), {
+
+		      		//center: new google.maps.LatLng(-33.92, 151.25)
+		    });
+		  var infowindow = new google.maps.InfoWindow();
+
+		  bounds  = new google.maps.LatLngBounds();
+
+		  // The marker, positioned at Uluru
+		  var marker, i;
+
+	    for (i = 0; i < locations.length; i++) {  
+	      marker = new google.maps.Marker({
+	        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+	        map: map
+	      });
+
+	      loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+			bounds.extend(loc);
+
+	      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+	        return function() {
+	          infowindow.setContent(locations[i][0]);
+	          infowindow.open(map, marker);
+	        }
+	      })(marker, i));
+	    }
+	    map.setOptions({
+		    maxZoom: 10,
+		  	minZoom: 10
+		});
+
+	    map.fitBounds(bounds);   
+		map.panToBounds(bounds);
+
+		}
+		    </script>
+		    <!--Load the API from the specified URL
+		    * The async attribute allows the browser to render the page while the API loads
+		    * The key parameter will contain your own API key (which is not needed for this tutorial)
+		    * The callback parameter executes the initMap() function
+		    -->
+		    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4wQZHZOhSRa7sonXpzERdbdJuqK2XsOk&callback=initMap" type="text/javascript"></script>
+		</div>
+		<div id="tab-2" class="tab-content">
+			<div id="cal">
+				<iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;height=400&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=945fathsf3efptdj8fbk6p9kl4%40group.calendar.google.com&amp;color=%2329527A&amp;ctz=America%2FNew_York" style="border:solid 1px #777" width="100%" height="400" frameborder="0" scrolling="no"></iframe>
+			</div>
+		</div>
+		<div id="tab-3" class="tab-content">
+			
+		</div>
+
+		<script type="text/javascript">
+
+		      var array = JSON.parse(sessionStorage.getItem('curr'));
+		      console.log(array);
+
+		 		if (sessionStorage.getItem('array') == null) {
+			      document.getElementById("tab-3").innerHTML = "no destinations";
+			    } else {
+			      var old = JSON.parse(sessionStorage.getItem('array'));
+			      
+			      var result = [];
+					var string;
+			      for(var i in old) {
+
+			      	// console.log(i)
+
+			      	// if(typeof old[i] === 'string' || old[i] instanceof String) {
+			      	// 	// console.log('SASDASDS')
+			      	// 	// old[i] = old[i].replace('"[\"', '').replace('\"]', '')
+			      	// 	// old[i] = old[i].replace('["', '').replace('"]', '')
+			      	// }
+
+			          result.push(old[i]);
+
+			      		string += old[i] +"<br>";
+			      		// console.log("string",string);
+					}
+
+			      document.getElementById("tab-3").innerHTML = string;
+
+			      //.push(sessionStorage.getItem('curr'));
+
+			      sessionStorage.setItem('array', JSON.stringify(result));
+			      console.log(JSON.stringify(result));
+			    }
+
+			  
+
+			</script>
+		
+		<div id="confirm" >
+			<button class="conbut" onclick ="saveDest()">Confirm Location</button>
+			<button class="add_search" onclick="addCont()"> Add and Continue </button>
+		</div>
+		<p id="demo"></p>
+	</div><!-- container -->
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</body>
+</html>
+
