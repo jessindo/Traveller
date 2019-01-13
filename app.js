@@ -9,9 +9,16 @@ var http = require('http');
 var path = require('path');
 var app      = express();
 
+var jquery = require("jquery");
+
+
 //for login page
 var passport = require('passport');
 var flash    = require('connect-flash');
+
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+var xhr = new XMLHttpRequest();
+
 
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -28,10 +35,14 @@ firebase.initializeApp({
   databaseURL: "https://traveller-43dad.firebaseio.com"
 });
 
+var all_users = null;
 var db = firebase.database();
 var ref = db.ref("user");
 ref.once("value", function(snapshot) {
-  console.log("user is:", snapshot.val());
+ // console.log("user is:", snapshot.val());
+  all_users = snapshot.val();
+ // var users = JSON.parse(all_users);
+  console.log("allusers:  ", all_users.hanna);
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -51,7 +62,8 @@ app.set('port', process.env.PORT || 4300);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname + '/public'));
 
 // required for passport
 app.use(session({ secret: 'secret', resave: true, saveUninitialized: true })); // session secret
@@ -65,40 +77,52 @@ if ('development' == app.get('env')) {
   app.use(errorHandler());
 }
 
-/*mysql.createConnection({multipleStatements: true});
-
-app.use(
-
-    connection(mysql,{
-
-        host: 'localhost',
-        user: 'root',
-        password : 'password',
-        port : 3306, //port mysql
-        database:'iaproject'
-
-    },'pool') //or single
-
-);*/
-
 app.get('/', login.home);
 app.get('/home', routes.index);
 app.get('/login', login.login);
 app.get('/signup', login.signup);
+app.get('/searchform', routes.search);
+app.get('/test', routes.test);
+app.get('/searchresults', routes.results);
+app.get('/maps',routes.maps);
+
 
 // process the signup form
 app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect : '/home', // redirect to the secure profile section
+    successRedirect : '/searchform', // redirect to the secure profile section
     failureRedirect : '/signup', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
 }));
 
 // process the login form
 app.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/home', // redirect to the secure profile section
+    successRedirect : '/searchform', // redirect to the secure profile section
     failureRedirect : '/login', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
 }));
+
+app.get('/index.html', function(req, res) {
+        res.sendFile(__dirname + "/" + "index.html");
+    });
+
+
+var NodeGeocoder = require('node-geocoder');
+
+   
+
+  app.get('/user', function(req, res){
+        response = {
+            first_name : req.query.first_name,
+            last_name : req.query.last_name,
+            gender: req.query.gender
+            };
+        
+        console.log(response);
+        
+        res.end(JSON.stringify(response));
+    });
+
+
 
 
 var server = http.createServer(app)

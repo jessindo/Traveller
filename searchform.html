@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Search Form</title>
-	<link rel="stylesheet" type="text/css" href="header.css">
+	<link rel="stylesheet" href="header.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<style>
 		.form-check-label {
@@ -15,6 +15,7 @@
 	</style>
 </head>
 <body>
+
 	<iframe src="test.html"></iframe>
 	
 	<div class="container">
@@ -32,22 +33,6 @@
 					<input type="text" class="form-control" id="name-id" name="city">
 				</div>
 			</div> <!-- .form-group -->
-			
-		<!-- 	<div class="form-group row">
-				<label for="media-type-id" class="col-sm-3 col-form-label text-sm-right">Media Type:</label>
-				<div class="col-sm-9">
-					<select name="media_type" id="media-type-id" class="form-control">
-						<option value="" selected>-- All --</option>
-
-						<?php while ( $row = $results_media_types->fetch_assoc() ) : ?>
-							<option value="<?php echo $row['media_type_id']; ?>">
-								<?php echo $row['name']; ?>
-							</option>
-						<?php endwhile; ?>
-
-					</select>
-				</div>
-			</div> <!-- .form-group --> 
 			<div class="form-group row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-9 mt-2">
